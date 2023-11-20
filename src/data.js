@@ -61,3 +61,5 @@ const categories = [
         "color": "red"
     }
 ]
+
+export { events, categories };
