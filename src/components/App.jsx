@@ -4,10 +4,23 @@ import Footer from "./Footer";
 import CategoryFilter from "./CategoryFilter";
 import DateFilter from "./DateFilter";
 import SortBy from "./SortBy";
+
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+
+import { ReactComponent as WorkIcon } from '../work.svg';
+import { ReactComponent as UniversityIcon } from '../university.svg';
+import './App.css';
+
+
 import { events, categories } from "../data.js";
 
 function App() {
     const dates = events.map((event) => event.startDate).sort();
+
+    // const map_img_category = new Map();
+    // map_img_category["Work"] = WorkIcon;
+    // map_img_category["Univiersity"] = UniversityIcon;
 
     const [sortBy, setSortBy] = useState("date");
     const [dateRange, setDateRange] = useState({
@@ -49,6 +62,15 @@ function App() {
         setSortBy(event.target.value)
     }
 
+    function addIcon(event) {
+        const { category } = event
+        if (category === 'Work') {
+            return <WorkIcon />
+        } else if (category === "University") {
+            return <UniversityIcon />
+        }
+    }
+
     return (
         <div>
             <Heading />
@@ -66,6 +88,26 @@ function App() {
                 sortBy={sortBy}
                 handleSortBy={handleSortBy}
             />
+            <VerticalTimeline>
+                {events.map((event) => (
+
+                    <VerticalTimelineElement
+                        className="vertical-timeline-element--work"
+                        contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                        contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                        date={event.startDate + " - " + event.endDate}
+                        iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                        icon={addIcon(event)}
+                    >
+                        <h3 className="vertical-timeline-element-title">{event.name}</h3>
+                        <h5 className="vertical-timeline-element-subtitle">Category: [{event.category}]</h5>
+                        <p>
+                            {event.description}
+                        </p>
+                        <button>{event.name}</button>
+                    </VerticalTimelineElement>
+                ))}
+            </VerticalTimeline>
             <Footer />
         </div >
 
