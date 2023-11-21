@@ -6,25 +6,40 @@ import { events, categories } from "../data.js";
 
 function App() {
     const dates = events.map((event) => event.startDate).sort();
-    const [startDate, setStartDate] = useState(dates[0]);
-    const [endDate, setEndDate] = useState(dates.reverse()[0]);
-    const [visibleCategories, setVisibleCategories] = useState(categories.map((category) => category.name));
     const [sortBy, setSortBy] = useState("date");
+    const [dateRange, setDateRange] = useState({
+        startDate: dates[0],
+        endDate: dates.reverse()[0]
+    });
+
+    const [visibleCategories, setVisibleCategories] = useState({
+        Work: true,
+        University: true,
+    });
 
 
     function handleVisibleCategories(event) {
-        // do to
-        const { name } = event
-        console.log(event.target)
-        setVisibleCategories(event.target.value);
+        const { name, checked } = event.target
+        setVisibleCategories(prevState => {
+            return {
+                ...prevState,
+                [name]: checked
+            }
+        })
     }
 
-    function handleStartDate(event) {
-        setStartDate(event.target.value);
-    }
+    function handleDateRange(event) {
+        const { name, value } = event.target;
 
-    function handleEndDate(event) {
-        setEndDate(event.target.value);
+        setDateRange(prevState => {
+            const newState = {
+                ...prevState,
+                [name]: value
+            };
+
+            return newState.endDate >= newState.startDate ? newState : prevState
+
+        })
     }
 
     function handleSortBy(event) {
@@ -40,33 +55,28 @@ function App() {
                 {
                     categories.map((category) => (
                         <div>
-                            <input type="checkbox" id={category.name} name={category.name} checked onChange={handleVisibleCategories} />
+                            <input type="checkbox" id={category.name} name={category.name} onChange={handleVisibleCategories} checked={visibleCategories[category.name]} />
                             <label htmlFor={category.name}>{category.name}</label>
                         </div>
                     ))
                 }
-
-                {/* <input type="checkbox" id="scales" name="scales" checked />
-                <select name="category" multiple={true} onChange={handleVisibleCategories}>
-                    {categories.map((category) => { return (<option value={category.name}>{category.name}</option>) })}
-                </select> */}
             </div>
             <div>
                 <label>Filter by date:</label>
                 <div>
                     <div>
                         <label>Start Date</label>
-                        <input type="date" value={startDate} onChange={handleStartDate}></input>
+                        <input type="date" name="startDate" value={dateRange.startDate} onChange={handleDateRange}></input>
                     </div>
 
                     <div>
                         <label>End Date</label>
-                        <input type="date" value={endDate} onChange={handleEndDate}></input>
+                        <input type="date" name="endDate" value={dateRange.endDate} onChange={handleDateRange}></input>
                     </div>
                 </div>
                 <div>
                     <label>Sort events by:</label>
-                    <select name="category" multiple={false} onChange={handleSortBy}>
+                    <select name="category" multiple={false} onChange={handleSortBy} value={sortBy}>
                         <option value="date">date</option>
                         <option value="category">category</option>
                     </select>
