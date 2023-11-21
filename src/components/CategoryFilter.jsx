@@ -1,13 +1,18 @@
 import React from "react";
 
 function CategoryFilter(props) {
-    const categories = props.categories
 
     return (
         <div>
-            <select name="category" multiple={true}>
-                {categories.map((category) => { return (<option value={category.name}>{category.name}</option>) })}
-            </select>
+            <label>Show categories:</label>
+            {
+                props.categories.map((category) => (
+                    <div>
+                        <input type="checkbox" id={category.name} name={category.name} onChange={props.handleVisibleCategories} checked={props.visibleCategories[category.name]} />
+                        <label htmlFor={category.name}>{category.name}</label>
+                    </div>
+                ))
+            }
         </div>
     )
 }
