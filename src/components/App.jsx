@@ -10,6 +10,7 @@ import 'react-vertical-timeline-component/style.min.css';
 
 import { ReactComponent as WorkIcon } from '../work.svg';
 import { ReactComponent as UniversityIcon } from '../university.svg';
+import { ReactComponent as PlusIcon } from '../plus.svg';
 import './App.css';
 
 
@@ -89,6 +90,21 @@ function App() {
                 handleSortBy={handleSortBy}
             />
             <VerticalTimeline>
+                <VerticalTimelineElement
+                    className="vertical-timeline-element--work"
+                    contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                    contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                    date=""
+                    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                    icon={<PlusIcon />}
+                >
+                    <h3 className="vertical-timeline-element-title">Add Event</h3>
+                    <h5 className="vertical-timeline-element-subtitle">Category:</h5>
+                    <p>
+                        ""
+                    </p>
+                    <button>Add</button>
+                </VerticalTimelineElement>
                 {events.map((event) => (
 
                     <VerticalTimelineElement
@@ -104,7 +120,8 @@ function App() {
                         <p>
                             {event.description}
                         </p>
-                        <button>{event.name}</button>
+                        <button>Edit</button>
+                        <button>Delete</button>
                     </VerticalTimelineElement>
                 ))}
             </VerticalTimeline>
