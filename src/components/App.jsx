@@ -29,12 +29,30 @@ function App() {
 
     function handleVisibleCategories(event) {
         const { name, checked } = event.target
+
         setVisibleCategories(prevState => {
             return {
                 ...prevState,
                 [name]: checked
             }
         })
+    }
+
+    function showVisibleCategories(eventsToShow) {
+
+        eventsToShow = eventsToShow.filter((event) => { return (event.endDate <= dateRange.endDate) })
+        eventsToShow = eventsToShow.filter((event) => { return (event.startDate >= dateRange.startDate) })
+
+        if (visibleCategories.University && visibleCategories.Work) {
+            return eventsToShow
+        }
+        else if (visibleCategories.University) {
+            return eventsToShow.filter((event) => { return (event.category == "University") })
+        }
+        else if (visibleCategories.Work) {
+            return eventsToShow.filter((event) => { return (event.category == "Work") })
+        }
+        return []
     }
 
     function handleDateRange(event) {
@@ -54,15 +72,12 @@ function App() {
     function handleSortBy(event) {
         const { value } = event.target;
         setSortBy(value)
-        console.log(value)
-
 
         if (value === "Category") {
 
             const sortedEvents = timelineEvents.sort((a, b) => {
                 return a.category.localeCompare(b.category)
             })
-            console.log(sortedEvents)
 
             setEvents(sortedEvents)
         }
@@ -70,8 +85,6 @@ function App() {
             const sortedEvents = timelineEvents.sort((a, b) => {
                 return a.endDate.localeCompare(b.endDate)
             })
-            console.log(sortedEvents)
-
 
             setEvents(sortedEvents)
         }
@@ -79,8 +92,6 @@ function App() {
             const sortedEvents = timelineEvents.sort((a, b) => {
                 return a.startDate.localeCompare(b.startDate)
             })
-            console.log(sortedEvents)
-
 
             setEvents(sortedEvents)
         }
@@ -105,7 +116,7 @@ function App() {
                 handleSortBy={handleSortBy}
             />
             <Timeline
-                events={timelineEvents}
+                events={showVisibleCategories(timelineEvents)}
                 sortBy={sortBy}
             />
             <Footer />
