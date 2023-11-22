@@ -12,7 +12,9 @@ function Timeline(props) {
 
     return (
         <VerticalTimeline>
-            <TimelineElementNew />
+            <TimelineElementNew
+                addNewEvent={props.addNewEvent}
+            />
             {props.events.map((event, index) => (
                 <TimelineElement
                     key={index}

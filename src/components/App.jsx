@@ -26,6 +26,11 @@ function App() {
         University: true,
     });
 
+    function addNewEvent(newEvent) {
+        setEvents([newEvent, ...timelineEvents])
+        console.log([newEvent, ...timelineEvents])
+        console.log(newEvent)
+    }
 
     function handleVisibleCategories(event) {
         const { name, checked } = event.target
@@ -118,6 +123,7 @@ function App() {
             <Timeline
                 events={showVisibleCategories(timelineEvents)}
                 sortBy={sortBy}
+                addNewEvent={addNewEvent}
             />
             <Footer />
         </div >
