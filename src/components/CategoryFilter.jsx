@@ -6,8 +6,8 @@ function CategoryFilter(props) {
         <div>
             <label>Show categories:</label>
             {
-                props.categories.map((category) => (
-                    <div>
+                props.categories.map((category, index) => (
+                    <div key={index}>
                         <input type="checkbox" id={category.name} name={category.name} onChange={props.handleVisibleCategories} checked={props.visibleCategories[category.name]} />
                         <label htmlFor={category.name}>{category.name}</label>
                     </div>

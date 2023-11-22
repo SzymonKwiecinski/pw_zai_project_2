@@ -6,8 +6,9 @@ function SortBy(props) {
         <div>
             <label>Sort events by:</label>
             <select name="category" multiple={false} onChange={props.handleSortBy} value={props.sortBy}>
-                <option value="date">date</option>
-                <option value="category">category</option>
+                <option value="EndDate">EndDate</option>
+                <option value="StartDate">StartDate</option>
+                <option value="Category">Category</option>
             </select>
         </div>
     )

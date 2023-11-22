@@ -4,26 +4,18 @@ import Footer from "./Footer";
 import CategoryFilter from "./CategoryFilter";
 import DateFilter from "./DateFilter";
 import SortBy from "./SortBy";
-
-import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
-import 'react-vertical-timeline-component/style.min.css';
-
-import { ReactComponent as WorkIcon } from '../work.svg';
-import { ReactComponent as UniversityIcon } from '../university.svg';
-import { ReactComponent as PlusIcon } from '../plus.svg';
+import Timeline from "./Timeline";
 import './App.css';
 
 
 import { events, categories } from "../data.js";
 
 function App() {
+    const [timelineEvents, setEvents] = useState(events);
     const dates = events.map((event) => event.startDate).sort();
 
-    // const map_img_category = new Map();
-    // map_img_category["Work"] = WorkIcon;
-    // map_img_category["Univiersity"] = UniversityIcon;
 
-    const [sortBy, setSortBy] = useState("date");
+    const [sortBy, setSortBy] = useState("EndDate");
     const [dateRange, setDateRange] = useState({
         startDate: dates[0],
         endDate: dates.reverse()[0]
@@ -60,17 +52,40 @@ function App() {
     }
 
     function handleSortBy(event) {
-        setSortBy(event.target.value)
-    }
+        const { value } = event.target;
+        setSortBy(value)
+        console.log(value)
 
-    function addIcon(event) {
-        const { category } = event
-        if (category === 'Work') {
-            return <WorkIcon />
-        } else if (category === "University") {
-            return <UniversityIcon />
+
+        if (value === "Category") {
+
+            const sortedEvents = timelineEvents.sort((a, b) => {
+                return a.category.localeCompare(b.category)
+            })
+            console.log(sortedEvents)
+
+            setEvents(sortedEvents)
+        }
+        else if (value === "EndDate") {
+            const sortedEvents = timelineEvents.sort((a, b) => {
+                return a.endDate.localeCompare(b.endDate)
+            })
+            console.log(sortedEvents)
+
+
+            setEvents(sortedEvents)
+        }
+        else if (value === "StartDate") {
+            const sortedEvents = timelineEvents.sort((a, b) => {
+                return a.startDate.localeCompare(b.startDate)
+            })
+            console.log(sortedEvents)
+
+
+            setEvents(sortedEvents)
         }
     }
+
 
     return (
         <div>
@@ -89,42 +104,10 @@ function App() {
                 sortBy={sortBy}
                 handleSortBy={handleSortBy}
             />
-            <VerticalTimeline>
-                <VerticalTimelineElement
-                    className="vertical-timeline-element--work"
-                    contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-                    contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                    date=""
-                    iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-                    icon={<PlusIcon />}
-                >
-                    <h3 className="vertical-timeline-element-title">Add Event</h3>
-                    <h5 className="vertical-timeline-element-subtitle">Category:</h5>
-                    <p>
-                        ""
-                    </p>
-                    <button>Add</button>
-                </VerticalTimelineElement>
-                {events.map((event) => (
-
-                    <VerticalTimelineElement
-                        className="vertical-timeline-element--work"
-                        contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-                        contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-                        date={event.startDate + " - " + event.endDate}
-                        iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-                        icon={addIcon(event)}
-                    >
-                        <h3 className="vertical-timeline-element-title">{event.name}</h3>
-                        <h5 className="vertical-timeline-element-subtitle">Category: [{event.category}]</h5>
-                        <p>
-                            {event.description}
-                        </p>
-                        <button>Edit</button>
-                        <button>Delete</button>
-                    </VerticalTimelineElement>
-                ))}
-            </VerticalTimeline>
+            <Timeline
+                events={timelineEvents}
+                sortBy={sortBy}
+            />
             <Footer />
         </div >
 
