@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { VerticalTimeline } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import TimelineElement from "./TimelineElement";
-import TimelineElementNew from "./TimelineElementNew";
+import TimelineElementNew from "./TimelineElementForm";
 import { events, categories } from "../data.js";
 
 const emptyEvent = {
