@@ -9,7 +9,6 @@ import { ReactComponent as UniversityIcon } from '../university.svg';
 function TimelineElement(props) {
     const [editableState, setEditableState] = useState(false)
     const [showedEvent, setShowedEvent] = useState(props.event)
-    let oldEvent = props.event;
 
     function addIcon(event) {
         const { category } = event
@@ -22,9 +21,7 @@ function TimelineElement(props) {
 
     function handleShowedEvent(event) {
         setShowedEvent(event)
-        // console.log(event)
-        // console.log(oldEvent)
-        props.saveChangesForEvent(event, oldEvent)
+        props.saveChangesForEvent(event)
         handleEditableState()
     }
 
