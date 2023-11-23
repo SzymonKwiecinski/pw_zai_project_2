@@ -4,10 +4,6 @@ import 'react-vertical-timeline-component/style.min.css';
 import TimelineElement from "./TimelineElement";
 import TimelineElementNew from "./TimelineElementNew";
 
-import { ReactComponent as WorkIcon } from '../work.svg';
-import { ReactComponent as UniversityIcon } from '../university.svg';
-import { ReactComponent as PlusIcon } from '../plus.svg';
-
 function Timeline(props) {
 
     return (

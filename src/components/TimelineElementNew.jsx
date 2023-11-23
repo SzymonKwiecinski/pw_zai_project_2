@@ -14,27 +14,37 @@ function TimelineElementNew(props) {
 
     });
 
-    function addNewEvent(event) {
-        let flag = false
-        for (const property in timelineEvent) {
-            flag = Boolean(timelineEvent[property])
+    const [saveButton, setSaveButton] = useState(false)
+
+    function handleSaveButton(state) {
+        let flag = true
+        for (const property in state) {
+            if (Boolean(state[property]) === false) {
+                flag = false;
+            }
+        }
+        if (flag) {
+            setSaveButton(true)
+        }
+        else {
+            setSaveButton(false)
         }
 
-        if (flag) {
+    }
+
+    function addNewEvent(event) {
+        if (saveButton) {
             props.addNewEvent(timelineEvent);
         }
         else {
             alert("Empty event")
         }
-
         event.preventDefault();
-
-
     }
+
 
     function handleSetEvent(event) {
         const { value, name } = event.target;
-
         setEvent(
             (prevState) => {
                 const newState = {
@@ -43,15 +53,20 @@ function TimelineElementNew(props) {
                 };
 
                 if (name === "startDate" && prevState.endDate == '') {
+                    handleSaveButton(newState);
                     return newState
-                } else {
-                    return newState.endDate >= newState.startDate ? newState : prevState
+                }
+                else if (newState.endDate >= newState.startDate) {
+                    handleSaveButton(newState);
+                    return newState
+                }
+                else {
+                    handleSaveButton(newState);
+                    return prevState
                 }
 
             }
-        )
-
-
+        );
     }
 
 
@@ -100,7 +115,7 @@ function TimelineElementNew(props) {
                     <label>EndDate:</label>
                     <input type="date" name="endDate" onChange={handleSetEvent} value={timelineEvent.endDate} />
                 </div>
-                <button>Save</button>
+                <button disabled={!saveButton}>Save</button>
             </form>
         </VerticalTimelineElement>
     )

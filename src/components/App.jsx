@@ -27,9 +27,9 @@ function App() {
     });
 
     function addNewEvent(newEvent) {
+        console.log(newEvent);
+        console.log(timelineEvents);
         setEvents([newEvent, ...timelineEvents])
-        console.log([newEvent, ...timelineEvents])
-        console.log(newEvent)
     }
 
     function handleVisibleCategories(event) {
