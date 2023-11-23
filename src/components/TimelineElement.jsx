@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 
 import { VerticalTimelineElement } from 'react-vertical-timeline-component';
+import TimelineElementNew from "./TimelineElementNew";
 
 import { ReactComponent as WorkIcon } from '../work.svg';
 import { ReactComponent as UniversityIcon } from '../university.svg';
 
 function TimelineElement(props) {
-    const indexEvent = props.indexEvent;
+    const [editableState, setEditableState] = useState(false)
+    const [showedEvent, setShowedEvent] = useState(props.event)
+    let oldEvent = props.event;
+
     function addIcon(event) {
         const { category } = event
         if (category === 'Work') {
@@ -16,28 +20,50 @@ function TimelineElement(props) {
         }
     }
 
+    function handleShowedEvent(event) {
+        setShowedEvent(event)
+        // console.log(event)
+        // console.log(oldEvent)
+        props.saveChangesForEvent(event, oldEvent)
+        handleEditableState()
+    }
+
     function deleteEvent() {
-        // console.log(indexEvent)
         props.deleteEvent(props.event);
     }
 
+    function handleEditableState() {
+        if (editableState === true) {
+            setEditableState(false)
+        }
+        else {
+            setEditableState(true)
+        }
+    }
+
     return (
-        <VerticalTimelineElement
-            className="vertical-timeline-element--work"
-            contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-            contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
-            date={props.event.startDate + " - " + props.event.endDate}
-            iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-            icon={addIcon(props.event)}
-        >
-            <h3 className="vertical-timeline-element-title">{props.event.name}</h3>
-            <h5 className="vertical-timeline-element-subtitle">Category: [{props.event.category}]</h5>
-            <p>
-                {props.event.description}
-            </p>
-            <button>Edit</button>
-            <button onClick={deleteEvent}>Delete</button>
-        </VerticalTimelineElement >
+        (!editableState) ?
+            <VerticalTimelineElement
+                className="vertical-timeline-element--work"
+                contentStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                contentArrowStyle={{ borderRight: '7px solid  rgb(33, 150, 243)' }}
+                date={showedEvent.startDate + " - " + showedEvent.endDate}
+                iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                icon={addIcon(showedEvent)}
+            >
+                <h3 className="vertical-timeline-element-title">{showedEvent.name}</h3>
+                <h5 className="vertical-timeline-element-subtitle">Category: [{showedEvent.category}]</h5>
+                <p>
+                    {showedEvent.description}
+                </p>
+                <button onClick={handleEditableState}>Edit</button>
+                <button onClick={deleteEvent}>Delete</button>
+            </VerticalTimelineElement >
+            :
+            <TimelineElementNew
+                handleEvent={handleShowedEvent}
+                initEvent={showedEvent}
+            />
     )
 }
 

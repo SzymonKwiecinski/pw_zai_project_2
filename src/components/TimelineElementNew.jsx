@@ -5,16 +5,9 @@ import { VerticalTimelineElement } from 'react-vertical-timeline-component';
 import { ReactComponent as PlusIcon } from '../plus.svg';
 
 function TimelineElementNew(props) {
-    const [timelineEvent, setEvent] = useState({
-        name: "",
-        startDate: "",
-        endDate: "",
-        description: "",
-        category: "Work"
+    const [timelineEvent, setEvent] = useState(props.initEvent);
 
-    });
-
-    const [saveButton, setSaveButton] = useState(false)
+    const [saveButton, setSaveButton] = useState((props.initEvent.name === "") ? false : true)
 
     function handleSaveButton(state) {
         let flag = true
@@ -34,7 +27,7 @@ function TimelineElementNew(props) {
 
     function addNewEvent(event) {
         if (saveButton) {
-            props.addNewEvent(timelineEvent);
+            props.handleEvent(timelineEvent);
         }
         else {
             alert("Empty event")

@@ -27,7 +27,11 @@ function App() {
     });
 
     function addNewEvent(newEvent) {
-        setEvents([newEvent, ...timelineEvents])
+        setEvents(
+            (prevState) => {
+                return [...prevState, newEvent]
+            }
+        )
     }
 
     function deleteEvent(eventToDelete) {
@@ -35,6 +39,14 @@ function App() {
             return e !== eventToDelete
         })
         setEvents(newEvents);
+    }
+
+    function saveChangesForEvent(v, v2) {
+        const xd = timelineEvents.indexOf(v2)
+        console.log(xd)
+        console.log(timelineEvents)
+        console.log(v)
+        console.log(v2)
     }
 
 
@@ -50,7 +62,8 @@ function App() {
     }
 
     function showVisibleCategories(eventsToShow) {
-
+        // console.log(eventsToShow)
+        // console.log(11111)
         eventsToShow = eventsToShow.filter((event) => { return (event.endDate <= dateRange.endDate) })
         eventsToShow = eventsToShow.filter((event) => { return (event.startDate >= dateRange.startDate) })
 
@@ -131,6 +144,7 @@ function App() {
                 sortBy={sortBy}
                 addNewEvent={addNewEvent}
                 deleteEvent={deleteEvent}
+                saveChangesForEvent={saveChangesForEvent}
             />
             <Footer />
         </div >

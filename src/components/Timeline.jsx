@@ -6,10 +6,20 @@ import TimelineElementNew from "./TimelineElementNew";
 
 function Timeline(props) {
 
+    const emptyEvent = {
+        name: "",
+        startDate: "",
+        endDate: "",
+        description: "",
+        category: "Work"
+
+    }
+
     return (
         <VerticalTimeline>
             <TimelineElementNew
-                addNewEvent={props.addNewEvent}
+                handleEvent={props.addNewEvent}
+                initEvent={emptyEvent}
             />
             {props.events.map((event, index) => (
                 <TimelineElement
@@ -17,6 +27,8 @@ function Timeline(props) {
                     event={event}
                     indexEvent={index}
                     deleteEvent={props.deleteEvent}
+                    addNewEvent={props.addNewEvent}
+                    saveChangesForEvent={props.saveChangesForEvent}
                 />
             ))}
         </VerticalTimeline>
