@@ -29,7 +29,7 @@ function TimelineElement(props) {
     }
 
     function deleteEvent() {
-        props.deleteEvent(props.event);
+        props.deleteEvent(showedEvent);
     }
 
     function handleEditableState() {
@@ -56,6 +56,7 @@ function TimelineElement(props) {
                 <p>
                     {showedEvent.description}
                 </p>
+                <p>{showedEvent.id}</p>
                 <button onClick={handleEditableState}>Edit</button>
                 <button onClick={deleteEvent}>Delete</button>
             </VerticalTimelineElement >

@@ -1,4 +1,6 @@
-const events = [
+import { v4 as uuidv4 } from 'uuid';
+
+const raw_events = [
     {
         name: "Planning for Q4",
         startDate: "2023-08-01",
@@ -56,4 +58,10 @@ const categories = [
     }
 ]
 
+const events = raw_events.map((event) => {
+    return {
+        ...event,
+        "id": uuidv4()
+    }
+})
 export { events, categories };

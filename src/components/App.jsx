@@ -4,16 +4,27 @@ import Footer from "./Footer";
 import CategoryFilter from "./CategoryFilter";
 import DateFilter from "./DateFilter";
 import SortBy from "./SortBy";
-import Timeline from "./Timeline";
 import './App.css';
-
-
+import { v4 as uuidv4 } from 'uuid';
+import { VerticalTimeline } from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+import TimelineElement from "./TimelineElement";
+import TimelineElementNew from "./TimelineElementNew";
 import { events, categories } from "../data.js";
+
+const emptyEvent = {
+    name: "",
+    startDate: "",
+    endDate: "",
+    description: "",
+    category: "Work",
+    id: uuidv4()
+
+}
+
 
 function App() {
     const [timelineEvents, setEvents] = useState(events);
-    // const dates = events.map((event) => event.startDate).sort();
-
 
     const [sortBy, setSortBy] = useState("EndDate");
     const [dateRange, setDateRange] = useState({
@@ -29,41 +40,35 @@ function App() {
     function addNewEvent(newEvent) {
         setEvents(
             (prevState) => {
-                return [...prevState, newEvent]
+                return [...prevState, { ...newEvent, id: uuidv4() }]
             }
         )
     }
 
     function deleteEvent(eventToDelete) {
-        const newEvents = timelineEvents.filter((e) => {
-            return e !== eventToDelete
-        })
-        setEvents(newEvents);
-
         setEvents(
             (prevState) => {
-                const iEventToDelete = prevState.indexOf(eventToDelete)
-                const xdd = prevState.slice(iEventToDelete)
-                // prevState[iOldEvent] = newEvent
-                return [...xdd]
+                return prevState.filter((e) => e.id !== eventToDelete.id)
             }
         )
     }
 
-    function saveChangesForEvent(newEvent, oldEvent) {
-        // const xd = timelineEvents.indexOf(v2)
+    function saveChangesForEvent(newEvent) {
 
         setEvents(
             (prevState) => {
-                const iOldEvent = prevState.indexOf(oldEvent)
-                prevState[iOldEvent] = newEvent
-                return [...prevState]
+                return prevState.map(e => {
+                    console.log(e)
+                    console.log(newEvent)
+                    if (e.id === newEvent.id) {
+                        return newEvent
+                    }
+                    else {
+                        return e
+                    }
+                })
             }
         )
-        // console.log(xd)
-        // console.log(timelineEvents)
-        // console.log(v)
-        // console.log(v2)
     }
 
 
@@ -79,8 +84,6 @@ function App() {
     }
 
     function showVisibleCategories(eventsToShow) {
-        // console.log(eventsToShow)
-        // console.log(11111)
         eventsToShow = eventsToShow.filter((event) => { return (event.endDate <= dateRange.endDate) })
         eventsToShow = eventsToShow.filter((event) => { return (event.startDate >= dateRange.startDate) })
 
@@ -156,13 +159,23 @@ function App() {
                 sortBy={sortBy}
                 handleSortBy={handleSortBy}
             />
-            <Timeline
-                events={showVisibleCategories(timelineEvents)}
-                sortBy={sortBy}
-                addNewEvent={addNewEvent}
-                deleteEvent={deleteEvent}
-                saveChangesForEvent={saveChangesForEvent}
-            />
+
+            <VerticalTimeline>
+                <TimelineElementNew
+                    handleEvent={addNewEvent}
+                    initEvent={emptyEvent}
+                />
+                {showVisibleCategories(timelineEvents).map((event) => (
+                    <TimelineElement
+                        key={event.id}
+                        event={event}
+                        deleteEvent={deleteEvent}
+                        addNewEvent={addNewEvent}
+                        saveChangesForEvent={saveChangesForEvent}
+                    />
+                ))}
+            </VerticalTimeline>
+
             <Footer />
         </div >
 

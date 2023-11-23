@@ -12,7 +12,8 @@ function TimelineElementNew(props) {
     function handleSaveButton(state) {
         let flag = true
         for (const property in state) {
-            if (Boolean(state[property]) === false) {
+
+            if (property !== "id" && Boolean(state[property]) === false) {
                 flag = false;
             }
         }
