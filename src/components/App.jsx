@@ -58,8 +58,6 @@ function App() {
         setEvents(
             (prevState) => {
                 return prevState.map(e => {
-                    console.log(e)
-                    console.log(newEvent)
                     if (e.id === newEvent.id) {
                         return newEvent
                     }
