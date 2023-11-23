@@ -6,6 +6,7 @@ import { ReactComponent as WorkIcon } from '../work.svg';
 import { ReactComponent as UniversityIcon } from '../university.svg';
 
 function TimelineElement(props) {
+    const indexEvent = props.indexEvent;
     function addIcon(event) {
         const { category } = event
         if (category === 'Work') {
@@ -13,6 +14,11 @@ function TimelineElement(props) {
         } else if (category === "University") {
             return <UniversityIcon />
         }
+    }
+
+    function deleteEvent() {
+        // console.log(indexEvent)
+        props.deleteEvent(props.event);
     }
 
     return (
@@ -30,8 +36,8 @@ function TimelineElement(props) {
                 {props.event.description}
             </p>
             <button>Edit</button>
-            <button>Delete</button>
-        </VerticalTimelineElement>
+            <button onClick={deleteEvent}>Delete</button>
+        </VerticalTimelineElement >
     )
 }
 

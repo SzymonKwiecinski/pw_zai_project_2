@@ -15,6 +15,8 @@ function Timeline(props) {
                 <TimelineElement
                     key={index}
                     event={event}
+                    indexEvent={index}
+                    deleteEvent={props.deleteEvent}
                 />
             ))}
         </VerticalTimeline>

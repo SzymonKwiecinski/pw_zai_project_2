@@ -27,10 +27,16 @@ function App() {
     });
 
     function addNewEvent(newEvent) {
-        console.log(newEvent);
-        console.log(timelineEvents);
         setEvents([newEvent, ...timelineEvents])
     }
+
+    function deleteEvent(eventToDelete) {
+        const newEvents = timelineEvents.filter((e) => {
+            return e !== eventToDelete
+        })
+        setEvents(newEvents);
+    }
+
 
     function handleVisibleCategories(event) {
         const { name, checked } = event.target
@@ -124,6 +130,7 @@ function App() {
                 events={showVisibleCategories(timelineEvents)}
                 sortBy={sortBy}
                 addNewEvent={addNewEvent}
+                deleteEvent={deleteEvent}
             />
             <Footer />
         </div >
