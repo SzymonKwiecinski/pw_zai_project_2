@@ -5,7 +5,6 @@ import TimelineElementNew from "./TimelineElementForm";
 
 import { ReactComponent as WorkIcon } from '../work.svg';
 import { ReactComponent as UniversityIcon } from '../university.svg';
-
 function TimelineElement(props) {
     const [editableState, setEditableState] = useState(false)
     const [showedEvent, setShowedEvent] = useState(props.event)
@@ -53,8 +52,10 @@ function TimelineElement(props) {
                 <p>
                     {showedEvent.description}
                 </p>
-                <button onClick={handleEditableState}>Edit</button>
-                <button onClick={deleteEvent}>Delete</button>
+                <div className="vertical-timeline-element-button-container" >
+                    <button className="vertical-timeline-element-button" onClick={handleEditableState}>Edit</button>
+                    <button className="vertical-timeline-element-button" onClick={deleteEvent}>Delete</button>
+                </div>
             </VerticalTimelineElement >
             :
             <TimelineElementNew

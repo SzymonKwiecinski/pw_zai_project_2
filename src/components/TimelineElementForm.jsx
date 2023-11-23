@@ -109,7 +109,7 @@ function TimelineElementNew(props) {
                     <label>EndDate:</label>
                     <input type="date" name="endDate" onChange={handleSetEvent} value={timelineEvent.endDate} />
                 </div>
-                <button disabled={!saveButton}>Save</button>
+                <button className="vertical-timeline-element-button" disabled={!saveButton}>Save</button>
             </form>
         </VerticalTimelineElement>
     )

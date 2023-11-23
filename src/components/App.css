@@ -68,6 +68,25 @@ label {
 
 }
 
+.vertical-timeline-element-button-container {
+    /* margin: 0 auto; */
+    text-align: center;
+
+}
+
+.vertical-timeline-element-button {
+    background: rgb(26, 107, 172);
+    border: none;
+    border-radius: 0.4rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    color: white
+}
+
+.vertical-timeline-element-button:hover {
+    background: rgb(62, 151, 224);
+}
+
 .vertical-timeline-element-date {
     color: #fff;
     font-size: large;
