@@ -12,13 +12,13 @@ import { events, categories } from "../data.js";
 
 function App() {
     const [timelineEvents, setEvents] = useState(events);
-    const dates = events.map((event) => event.startDate).sort();
+    // const dates = events.map((event) => event.startDate).sort();
 
 
     const [sortBy, setSortBy] = useState("EndDate");
     const [dateRange, setDateRange] = useState({
-        startDate: dates[0],
-        endDate: dates.reverse()[0]
+        startDate: events.map((event) => event.startDate).sort()[0],
+        endDate: events.map((event) => event.endDate).sort().reverse()[0]
     });
 
     const [visibleCategories, setVisibleCategories] = useState({
@@ -39,14 +39,31 @@ function App() {
             return e !== eventToDelete
         })
         setEvents(newEvents);
+
+        setEvents(
+            (prevState) => {
+                const iEventToDelete = prevState.indexOf(eventToDelete)
+                const xdd = prevState.slice(iEventToDelete)
+                // prevState[iOldEvent] = newEvent
+                return [...xdd]
+            }
+        )
     }
 
-    function saveChangesForEvent(v, v2) {
-        const xd = timelineEvents.indexOf(v2)
-        console.log(xd)
-        console.log(timelineEvents)
-        console.log(v)
-        console.log(v2)
+    function saveChangesForEvent(newEvent, oldEvent) {
+        // const xd = timelineEvents.indexOf(v2)
+
+        setEvents(
+            (prevState) => {
+                const iOldEvent = prevState.indexOf(oldEvent)
+                prevState[iOldEvent] = newEvent
+                return [...prevState]
+            }
+        )
+        // console.log(xd)
+        // console.log(timelineEvents)
+        // console.log(v)
+        // console.log(v2)
     }
 
 

@@ -26,6 +26,7 @@ function TimelineElementNew(props) {
     }
 
     function addNewEvent(event) {
+        console.log(timelineEvent)
         if (saveButton) {
             props.handleEvent(timelineEvent);
         }
