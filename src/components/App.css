@@ -3,8 +3,72 @@
 } */
 html {
     background: rgb(174, 167, 167);
+    font-family: monospace;
+}
+
+header {
+    background-color: rgb(174, 167, 167);
+    margin: auto -16px;
+    padding: 16px 32px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    align-content: center;
+}
+
+header h1 {
+    color: #fff;
+    text-align: center;
+}
+
+footer {
+    /* position: absolute; */
+    text-align: center;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    width: 100%;
+    align-content: center;
+}
+
+footer p {
+    color: #fff;
+    padding: 0.5rem 0;
+}
+
+.sort-container {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center;
+    justify-content: center; */
+    border: solid 0.2rem rgb(255, 255, 255);
+    max-width: 50rem;
+    margin: 0 auto;
+}
+
+.sort-container__group {
+    padding: 0.3rem;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    align-items: center;
+    border: solid 0.2rem rgb(255, 255, 255);
+}
+
+.sort-container__item {
+    margin-right: 0.4rem;
+}
+
+.sort-container__item,
+label {
+    min-width: 10rem;
+}
+
+.sort-container__input,
+.sort-container__selector {
+    background: rgb(223, 221, 221);
+    border: none;
+    border-radius: 0.4rem;
+
 }
 
 .vertical-timeline-element-date {
-    color: black;
+    color: #fff;
+    font-size: large;
 }

@@ -143,21 +143,24 @@ function App() {
     return (
         <div>
             <Heading />
-            <CategoryFilter
-                categories={categories}
-                visibleCategories={visibleCategories}
-                handleVisibleCategories={handleVisibleCategories}
-            />
-            <DateFilter
-                categories={categories}
-                dateRange={dateRange}
-                handleDateRange={handleDateRange}
-            />
-            <SortBy
-                sortBy={sortBy}
-                handleSortBy={handleSortBy}
-            />
-
+            <div className="sort-container">
+                <CategoryFilter
+                    categories={categories}
+                    visibleCategories={visibleCategories}
+                    handleVisibleCategories={handleVisibleCategories}
+                />
+                <DateFilter
+                    className="sort-container__group"
+                    categories={categories}
+                    dateRange={dateRange}
+                    handleDateRange={handleDateRange}
+                />
+                <SortBy
+                    className="sort-container__group"
+                    sortBy={sortBy}
+                    handleSortBy={handleSortBy}
+                />
+            </div>
             <VerticalTimeline>
                 <TimelineElementNew
                     handleEvent={addNewEvent}
