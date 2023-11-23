@@ -74,26 +74,27 @@ function TimelineElementNew(props) {
             icon={<PlusIcon />}
         >
             <h3 className="vertical-timeline-element-title">Add new event</h3>
-            <form onSubmit={addNewEvent}>
-                <div>
+            <form className="vertical-timeline-element-form" onSubmit={addNewEvent}>
+                <div className="vertical-timeline-element-form-group">
                     <label>Title: </label>
-                    <input className="vertical-timeline-element-title"
+                    <input className="vertical-timeline-element-form-input"
                         name="name"
                         value={timelineEvent.name && timelineEvent.name}
                         placeholder="Add Event Title"
                         onChange={handleSetEvent}
                     />
                 </div>
-                <div>
-                    <label>Category: </label>
-                    <select name="category" onChange={handleSetEvent} value={timelineEvent.category}>
+                <div className="vertical-timeline-element-form-group">
+                    <label className="vertical-timeline-element-form-label">Category: </label>
+                    <select className="vertical-timeline-element-form-select" name="category" onChange={handleSetEvent} value={timelineEvent.category}>
                         <option value="Work">Work</option>
                         <option value="University">University</option>
                     </select>
                 </div>
-                <div>
-                    <label>Description: </label>
+                <div className="vertical-timeline-element-form-group">
+                    <label className="vertical-timeline-element-form-label">Description: </label>
                     <textarea
+                        className="vertical-timeline-element-form-textarea"
                         name="description"
                         onChange={handleSetEvent}
                         value={timelineEvent.description && timelineEvent.description}
@@ -101,13 +102,13 @@ function TimelineElementNew(props) {
                         rows={3}
                     />
                 </div>
-                <div>
-                    <label>StartDate:</label>
-                    <input type="date" name="startDate" onChange={handleSetEvent} value={timelineEvent.startDate} />
+                <div className="vertical-timeline-element-form-group" >
+                    <label className="vertical-timeline-element-form-label">StartDate:</label>
+                    <input className="vertical-timeline-element-form-input" type="date" name="startDate" onChange={handleSetEvent} value={timelineEvent.startDate} />
                 </div>
-                <div>
-                    <label>EndDate:</label>
-                    <input type="date" name="endDate" onChange={handleSetEvent} value={timelineEvent.endDate} />
+                <div className="vertical-timeline-element-form-group">
+                    <label className="vertical-timeline-element-form-label">EndDate:</label>
+                    <input className="vertical-timeline-element-form-input" type="date" name="endDate" onChange={handleSetEvent} value={timelineEvent.endDate} />
                 </div>
                 <button className="vertical-timeline-element-button" disabled={!saveButton}>Save</button>
             </form>

@@ -87,6 +87,52 @@ label {
     background: rgb(62, 151, 224);
 }
 
+
+
+.vertical-timeline-element-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.vertical-timeline-element-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.vertical-timeline-element-form-group {
+    margin-bottom: 1rem;
+}
+
+.vertical-timeline-element-form-label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.vertical-timeline-element-form-select,
+.vertical-timeline-element-form-input,
+.vertical-timeline-element-form-textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.4rem;
+    background: rgb(223, 221, 221);
+}
+
+.vertical-timeline-element-button {
+    background: rgb(26, 107, 172);
+    border: none;
+    border-radius: 0.4rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    cursor: pointer;
+}
+
+.vertical-timeline-element-button:hover {
+    background: rgb(62, 151, 224);
+}
+
 .vertical-timeline-element-date {
     color: #fff;
     font-size: large;
