@@ -1,12 +1,14 @@
-Przedmiot: Zaawansowane Aplikacje internetowe
+* Przedmiot: Zaawansowane Aplikacje internetowe
 
-Projekt : Projekt numer 2 - aplikacja JS
+* Projekt : Projekt numer 2 - aplikacja JS
 STwórca: Szymon Kwieciński
 
-Aby uruchmomic aplikacje nalerzy:
+* Aby uruchmomic aplikacje nalerzy:
 ```bash
 npm inistall
 npm start
 ```
 
-Projekt został opisany w dokumentacji pdf.
+* Wersja __node.js: v20.6.0__
+
+* Projekt został opisany w dokumentacji pdf.
