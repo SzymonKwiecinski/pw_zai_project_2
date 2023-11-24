@@ -6,8 +6,9 @@ import { ReactComponent as PlusIcon } from '../plus.svg';
 
 function TimelineElementNew(props) {
     const [timelineEvent, setEvent] = useState(props.initEvent);
-
     const [saveButton, setSaveButton] = useState((props.initEvent.name === "") ? false : true)
+    const [prompt, setPrompt] = useState(!saveButton ? "Please provide all information" : "Form ready to Save :)");
+
 
     function handleSaveButton(state) {
         let flag = true
@@ -19,9 +20,11 @@ function TimelineElementNew(props) {
         }
         if (flag) {
             setSaveButton(true)
+            setPrompt("Form ready to Save :)")
         }
         else {
             setSaveButton(false)
+            setPrompt("Please provide all information!!")
         }
 
     }
@@ -110,6 +113,7 @@ function TimelineElementNew(props) {
                     <label className="vertical-timeline-element-form-label">EndDate:</label>
                     <input className="vertical-timeline-element-form-input" type="date" name="endDate" onChange={handleSetEvent} value={timelineEvent.endDate} />
                 </div>
+                <p style={{ color: (saveButton === false) ? "#c84c17" : "#357834", fontWeight: "bold", background: "#dfdddd", borderRadius: "0.2rem" }}>{prompt}</p>
                 <button className="vertical-timeline-element-button" disabled={!saveButton}>Save</button>
             </form>
         </VerticalTimelineElement>

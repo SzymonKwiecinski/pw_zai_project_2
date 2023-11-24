@@ -77,10 +77,9 @@ label {
     color: white
 }
 
-.vertical-timeline-element-button:hover {
+.vertical-timeline-element-button:hover.vertical-timeline-element-button:enabled {
     background: rgb(62, 151, 224);
 }
-
 
 
 .vertical-timeline-element-title {
@@ -111,7 +110,7 @@ label {
     padding: 0.5rem;
     border: none;
     border-radius: 0.4rem;
-    background: rgb(223, 221, 221);
+    background: #dfdddd;
 }
 
 .vertical-timeline-element-button {
@@ -123,11 +122,8 @@ label {
     cursor: pointer;
 }
 
-.vertical-timeline-element-button:hover {
-    background: rgb(62, 151, 224);
-}
 
-.vertical-timeline-element-date {
+*/ .vertical-timeline-element-date {
     color: #fff;
     font-size: large;
 }
