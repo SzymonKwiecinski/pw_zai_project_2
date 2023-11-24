@@ -12,3 +12,6 @@ npm start
 * Wersja __node.js: v20.6.0__
 
 * Projekt został opisany w dokumentacji pdf.
+
+GitHub repozytorium:
+https://github.com/SzymonKwiecinski/pw_zai_project_2
