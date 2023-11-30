@@ -15,3 +15,14 @@ npm start
 
 GitHub repozytorium:
 https://github.com/SzymonKwiecinski/pw_zai_project_2
+
+Technologies:
+* JavaScript
+* React v18
+* Node v20
+* HTML5
+* CSS3
+
+
+Youtube 60 seconds presentation
+https://youtu.be/05l-8iHh2BE
